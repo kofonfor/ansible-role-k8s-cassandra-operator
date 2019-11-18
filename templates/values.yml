@@ -1,1 +1,4 @@
 createCustomResource: true
+image:
+  repository: orangeopensource/cassandra-k8s-operator
+  tag: {{ k8s_cassandra_operator_image_tag }}
