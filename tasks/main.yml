@@ -1,0 +1,8 @@
+- name: enable the incubator repo
+  shell: helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com
+
+- name: put values
+  template: src=values.yml dest=/tmp/cassandra_operator-{{ cassandra_operator_helm_release }}.yml
+
+- name: upgrade {{ cassandra_operator_helm_release }} release using a Helm chart
+  shell: helm upgrade {{ cassandra_operator_helm_release }} incubator/cassandra-operator --install --namespace {{ k8s_namespace }} -f /tmp/cassandra_operator-{{ cassandra_operator_helm_release }}.yml
